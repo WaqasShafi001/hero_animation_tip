@@ -10,10 +10,7 @@ class PageTransitions {
           position: Tween<Offset>(
             begin: Offset(1.0, 0.0),
             end: Offset.zero,
-          ).animate(CurvedAnimation(
-            parent: animation,
-            curve: Curves.easeOutCubic,
-          )),
+          ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOutCubic)),
           child: child,
         );
       },
@@ -25,10 +22,7 @@ class PageTransitions {
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionDuration: Duration(milliseconds: 600),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(
-          opacity: animation,
-          child: child,
-        );
+        return FadeTransition(opacity: animation, child: child);
       },
     );
   }

@@ -4,30 +4,10 @@ import 'photo_detail_screen.dart';
 
 class PhotoGalleryScreen extends StatelessWidget {
   final List<ImageData> images = [
-    ImageData(
-      id: 1,
-      name: 'Mountain Lake',
-      color: Colors.blue,
-      emoji: '🏔️',
-    ),
-    ImageData(
-      id: 2,
-      name: 'Forest Path',
-      color: Colors.green,
-      emoji: '🌲',
-    ),
-    ImageData(
-      id: 3,
-      name: 'Ocean Sunset',
-      color: Colors.orange,
-      emoji: '🌅',
-    ),
-    ImageData(
-      id: 4,
-      name: 'Desert Dunes',
-      color: Colors.amber,
-      emoji: '🏜️',
-    ),
+    ImageData(id: 1, name: 'Mountain Lake', color: Colors.blue, emoji: '🏔️'),
+    ImageData(id: 2, name: 'Forest Path', color: Colors.green, emoji: '🌲'),
+    ImageData(id: 3, name: 'Ocean Sunset', color: Colors.orange, emoji: '🌅'),
+    ImageData(id: 4, name: 'Desert Dunes', color: Colors.amber, emoji: '🏜️'),
   ];
 
   PhotoGalleryScreen({super.key});
@@ -47,13 +27,7 @@ class PhotoGalleryScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Tap any image to see Hero animation',
-              style: TextStyle(
-                color: Colors.blue[700],
-                fontSize: 14,
-              ),
-            ),
+            Text('Tap any image to see Hero animation', style: TextStyle(color: Colors.blue[700], fontSize: 14)),
             SizedBox(height: 16),
             Expanded(
               child: GridView.builder(
@@ -68,12 +42,7 @@ class PhotoGalleryScreen extends StatelessWidget {
                   final image = images[index];
                   return GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PhotoDetailScreen(image: image),
-                        ),
-                      );
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => PhotoDetailScreen(image: image)));
                     },
                     child: Column(
                       children: [
@@ -86,30 +55,16 @@ class PhotoGalleryScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: image.color,
                                 borderRadius: BorderRadius.circular(12),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black26,
-                                    blurRadius: 4,
-                                    offset: Offset(0, 2),
-                                  )
-                                ],
+                                boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 2))],
                               ),
-                              child: Center(
-                                child: Text(
-                                  image.emoji,
-                                  style: TextStyle(fontSize: 48),
-                                ),
-                              ),
+                              child: Center(child: Text(image.emoji, style: TextStyle(fontSize: 48))),
                             ),
                           ),
                         ),
                         SizedBox(height: 8),
                         Text(
                           image.name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.grey[700],
-                          ),
+                          style: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey[700]),
                           textAlign: TextAlign.center,
                         ),
                       ],

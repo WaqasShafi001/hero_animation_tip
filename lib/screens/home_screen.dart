@@ -4,11 +4,13 @@ import 'advanced_hero/gallery_screen.dart';
 import '../utils/page_transitions.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late AnimationController _logoController;
   late AnimationController _cardController;
   late Animation<double> _logoAnimation;
@@ -19,23 +21,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    _logoController = AnimationController(
-      duration: Duration(milliseconds: 1000),
-      vsync: this,
-    );
+    _logoController = AnimationController(duration: Duration(milliseconds: 1000), vsync: this);
 
-    _cardController = AnimationController(
-      duration: Duration(milliseconds: 1200),
-      vsync: this,
-    );
+    _cardController = AnimationController(duration: Duration(milliseconds: 1200), vsync: this);
 
     _logoAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _logoController,
-      curve: Curves.elasticOut,
-    ));
+    ).animate(CurvedAnimation(parent: _logoController, curve: Curves.elasticOut));
 
     _card1Animation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
@@ -90,45 +83,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             height: 100,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
-                                colors: [
-                                  Colors.blue.shade400,
-                                  Colors.purple.shade400
-                                ],
+                                colors: [Colors.blue.shade400, Colors.purple.shade400],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                               ),
                               shape: BoxShape.circle,
                               boxShadow: [
-                                BoxShadow(
-                                  color: Colors.blue.withOpacity(0.3),
-                                  blurRadius: 20,
-                                  offset: Offset(0, 10),
-                                )
+                                BoxShadow(color: Colors.blue.withValues(alpha: 0.3), blurRadius: 20, offset: Offset(0, 10)),
                               ],
                             ),
-                            child: Center(
-                              child: Text(
-                                '🚀',
-                                style: TextStyle(fontSize: 40),
-                              ),
-                            ),
+                            child: Center(child: Text('🚀', style: TextStyle(fontSize: 40))),
                           ),
                           SizedBox(height: 24),
                           Text(
                             'Hero Animations',
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
-                            ),
+                            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black87),
                           ),
                           SizedBox(height: 8),
                           Text(
                             'Showcase Flutter\'s powerful Hero widgets',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey[600],
-                            ),
+                            style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -144,13 +118,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               _buildAnimatedCard(
                 animation: _card1Animation,
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    PageTransitions.slideFromRight(PhotoGalleryScreen()),
-                  );
+                  Navigator.push(context, PageTransitions.slideFromRight(PhotoGalleryScreen()));
                 },
                 gradient: [Colors.blue.shade400, Colors.blue.shade600],
-                shadowColor: Colors.blue.withOpacity(0.3),
+                shadowColor: Colors.blue.withValues(alpha: 0.3),
                 icon: '✨',
                 title: 'Basic Hero Animation',
                 subtitle: 'Simple image transitions between screens',
@@ -162,13 +133,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               _buildAnimatedCard(
                 animation: _card2Animation,
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    PageTransitions.slideFromRight(GalleryScreen()),
-                  );
+                  Navigator.push(context, PageTransitions.slideFromRight(GalleryScreen()));
                 },
                 gradient: [Colors.purple.shade400, Colors.purple.shade600],
-                shadowColor: Colors.purple.withOpacity(0.3),
+                shadowColor: Colors.purple.withValues(alpha: 0.3),
                 icon: '🔥',
                 title: 'Advanced Hero Animation',
                 subtitle: 'Multiple elements with staggered animations',
@@ -179,10 +147,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               // Footer
               Text(
                 'Tap a card to explore different Hero animation techniques',
-                style: TextStyle(
-                  color: Colors.grey[500],
-                  fontSize: 14,
-                ),
+                style: TextStyle(color: Colors.grey[500], fontSize: 14),
                 textAlign: TextAlign.center,
               ),
 
@@ -218,19 +183,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: double.infinity,
                   height: 140,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: gradient,
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+                    gradient: LinearGradient(colors: gradient, begin: Alignment.topLeft, end: Alignment.bottomRight),
                     borderRadius: BorderRadius.circular(24),
-                    boxShadow: [
-                      BoxShadow(
-                        color: shadowColor,
-                        blurRadius: 20,
-                        offset: Offset(0, 10),
-                      )
-                    ],
+                    boxShadow: [BoxShadow(color: shadowColor, blurRadius: 20, offset: Offset(0, 10))],
                   ),
                   child: Stack(
                     children: [
@@ -240,10 +195,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: Container(
                           width: 100,
                           height: 100,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            shape: BoxShape.circle,
-                          ),
+                          decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.1), shape: BoxShape.circle),
                         ),
                       ),
                       Padding(
@@ -254,10 +206,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           children: [
                             Row(
                               children: [
-                                Text(
-                                  icon,
-                                  style: TextStyle(fontSize: 32),
-                                ),
+                                Text(icon, style: TextStyle(fontSize: 32)),
                                 SizedBox(width: 16),
                                 Expanded(
                                   child: Column(
@@ -265,28 +214,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     children: [
                                       Text(
                                         title,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                        style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
                                       ),
                                       SizedBox(height: 4),
-                                      Text(
-                                        subtitle,
-                                        style: TextStyle(
-                                          color: Colors.white.withOpacity(0.9),
-                                          fontSize: 14,
-                                        ),
-                                      ),
+                                      Text(subtitle, style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 14)),
                                     ],
                                   ),
                                 ),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
+                                Icon(Icons.arrow_forward_ios, color: Colors.white, size: 20),
                               ],
                             ),
                           ],

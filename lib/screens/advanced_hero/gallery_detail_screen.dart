@@ -4,14 +4,13 @@ import '../../models/image_model.dart';
 class GalleryDetailScreen extends StatefulWidget {
   final ImageData image;
 
-  const GalleryDetailScreen({Key? key, required this.image}) : super(key: key);
+  const GalleryDetailScreen({super.key, required this.image});
 
   @override
-  _GalleryDetailScreenState createState() => _GalleryDetailScreenState();
+  GalleryDetailScreenState createState() => GalleryDetailScreenState();
 }
 
-class _GalleryDetailScreenState extends State<GalleryDetailScreen>
-    with TickerProviderStateMixin {
+class GalleryDetailScreenState extends State<GalleryDetailScreen> with TickerProviderStateMixin {
   late AnimationController _detailController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -19,10 +18,7 @@ class _GalleryDetailScreenState extends State<GalleryDetailScreen>
   @override
   void initState() {
     super.initState();
-    _detailController = AnimationController(
-      duration: Duration(milliseconds: 800),
-      vsync: this,
-    );
+    _detailController = AnimationController(duration: Duration(milliseconds: 800), vsync: this);
 
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
@@ -31,10 +27,7 @@ class _GalleryDetailScreenState extends State<GalleryDetailScreen>
       ),
     );
 
-    _slideAnimation = Tween<Offset>(
-      begin: Offset(0, 0.3),
-      end: Offset.zero,
-    ).animate(
+    _slideAnimation = Tween<Offset>(begin: Offset(0, 0.3), end: Offset.zero).animate(
       CurvedAnimation(
         parent: _detailController,
         curve: Interval(0.3, 1.0, curve: Curves.easeOutBack),
@@ -64,10 +57,7 @@ class _GalleryDetailScreenState extends State<GalleryDetailScreen>
             elevation: 0,
             leading: Container(
               margin: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.9),
-                shape: BoxShape.circle,
-              ),
+              decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.9), shape: BoxShape.circle),
               child: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.black87),
                 onPressed: () => Navigator.pop(context),
@@ -76,10 +66,7 @@ class _GalleryDetailScreenState extends State<GalleryDetailScreen>
             actions: [
               Container(
                 margin: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
-                  shape: BoxShape.circle,
-                ),
+                decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.9), shape: BoxShape.circle),
                 child: IconButton(
                   icon: Icon(Icons.favorite_border, color: Colors.black87),
                   onPressed: () {},
@@ -99,18 +86,10 @@ class _GalleryDetailScreenState extends State<GalleryDetailScreen>
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
-                            colors: [
-                              widget.image.color,
-                              widget.image.color.withOpacity(0.8),
-                            ],
+                            colors: [widget.image.color, widget.image.color.withValues(alpha: 0.8)],
                           ),
                         ),
-                        child: Center(
-                          child: Text(
-                            widget.image.emoji,
-                            style: TextStyle(fontSize: 120),
-                          ),
-                        ),
+                        child: Center(child: Text(widget.image.emoji, style: TextStyle(fontSize: 120))),
                       ),
                     ),
                   ),
@@ -123,12 +102,9 @@ class _GalleryDetailScreenState extends State<GalleryDetailScreen>
                         color: Colors.transparent,
                         child: Container(
                           constraints: BoxConstraints(maxWidth: 100),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 8,
-                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.9),
+                            color: Colors.white.withValues(alpha: 0.9),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: FittedBox(
@@ -140,11 +116,7 @@ class _GalleryDetailScreenState extends State<GalleryDetailScreen>
                                 SizedBox(width: 4),
                                 Text(
                                   '${widget.image.rating}',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87),
                                 ),
                               ],
                             ),
@@ -178,15 +150,11 @@ class _GalleryDetailScreenState extends State<GalleryDetailScreen>
                                 tag: 'title_${widget.image.id}',
                                 child: Material(
                                   color: Colors.transparent,
-                                  child: Container(
+                                  child: SizedBox(
                                     width: double.infinity,
                                     child: Text(
                                       widget.image.name,
-                                      style: TextStyle(
-                                        fontSize: 32,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black87,
-                                      ),
+                                      style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black87),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -198,7 +166,7 @@ class _GalleryDetailScreenState extends State<GalleryDetailScreen>
                                 tag: 'location_${widget.image.id}',
                                 child: Material(
                                   color: Colors.transparent,
-                                  child: Container(
+                                  child: SizedBox(
                                     width: double.infinity,
                                     child: FittedBox(
                                       fit: BoxFit.scaleDown,
@@ -206,18 +174,11 @@ class _GalleryDetailScreenState extends State<GalleryDetailScreen>
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Icon(
-                                            Icons.location_on,
-                                            color: Colors.grey[600],
-                                            size: 18,
-                                          ),
+                                          Icon(Icons.location_on, color: Colors.grey[600], size: 18),
                                           SizedBox(width: 4),
                                           Text(
                                             widget.image.location ?? '',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.grey[600],
-                                            ),
+                                            style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                                           ),
                                         ],
                                       ),
@@ -232,25 +193,17 @@ class _GalleryDetailScreenState extends State<GalleryDetailScreen>
 
                           Text(
                             'About',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
-                            ),
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black87),
                           ),
                           SizedBox(height: 12),
                           Text(
                             widget.image.description ?? '',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey[700],
-                              height: 1.6,
-                            ),
+                            style: TextStyle(fontSize: 16, color: Colors.grey[700], height: 1.6),
                           ),
 
                           SizedBox(height: 32),
 
-                          Container(
+                          SizedBox(
                             width: double.infinity,
                             height: 56,
                             child: ElevatedButton(
@@ -259,17 +212,9 @@ class _GalleryDetailScreenState extends State<GalleryDetailScreen>
                                 backgroundColor: widget.image.color,
                                 foregroundColor: Colors.white,
                                 elevation: 0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                               ),
-                              child: Text(
-                                'Book Experience',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              child: Text('Book Experience', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                             ),
                           ),
                         ],

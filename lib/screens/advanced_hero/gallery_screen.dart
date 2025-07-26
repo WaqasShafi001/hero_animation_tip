@@ -4,19 +4,19 @@ import '../../utils/page_transitions.dart';
 import 'gallery_detail_screen.dart';
 
 class GalleryScreen extends StatefulWidget {
+  const GalleryScreen({super.key});
+
   @override
-  _GalleryScreenState createState() => _GalleryScreenState();
+  GalleryScreenState createState() => GalleryScreenState();
 }
 
-class _GalleryScreenState extends State<GalleryScreen>
-    with TickerProviderStateMixin {
+class GalleryScreenState extends State<GalleryScreen> with TickerProviderStateMixin {
   late AnimationController _staggerController;
   final List<ImageData> images = [
     ImageData(
       id: 1,
       name: 'Mountain Lake',
-      description:
-          'A serene alpine lake surrounded by snow-capped peaks, perfect for meditation and reflection.',
+      description: 'A serene alpine lake surrounded by snow-capped peaks, perfect for meditation and reflection.',
       color: Colors.blue.shade600,
       emoji: '🏔️',
       location: 'Swiss Alps',
@@ -25,8 +25,7 @@ class _GalleryScreenState extends State<GalleryScreen>
     ImageData(
       id: 2,
       name: 'Mystic Forest',
-      description:
-          'Ancient forest path with towering trees and filtered sunlight creating magical atmosphere.',
+      description: 'Ancient forest path with towering trees and filtered sunlight creating magical atmosphere.',
       color: Colors.green.shade600,
       emoji: '🌲',
       location: 'Black Forest',
@@ -35,8 +34,7 @@ class _GalleryScreenState extends State<GalleryScreen>
     ImageData(
       id: 3,
       name: 'Golden Sunset',
-      description:
-          'Breathtaking ocean sunset with golden reflections dancing on the waves.',
+      description: 'Breathtaking ocean sunset with golden reflections dancing on the waves.',
       color: Colors.orange.shade600,
       emoji: '🌅',
       location: 'Maldives',
@@ -45,8 +43,7 @@ class _GalleryScreenState extends State<GalleryScreen>
     ImageData(
       id: 4,
       name: 'Desert Oasis',
-      description:
-          'Hidden oasis in the vast desert dunes, a sanctuary of life in endless sand.',
+      description: 'Hidden oasis in the vast desert dunes, a sanctuary of life in endless sand.',
       color: Colors.amber.shade600,
       emoji: '🏜️',
       location: 'Sahara',
@@ -55,8 +52,7 @@ class _GalleryScreenState extends State<GalleryScreen>
     ImageData(
       id: 5,
       name: 'Cherry Blossoms',
-      description:
-          'Pink petals floating like snow in the gentle spring breeze.',
+      description: 'Pink petals floating like snow in the gentle spring breeze.',
       color: Colors.pink.shade400,
       emoji: '🌸',
       location: 'Kyoto',
@@ -65,8 +61,7 @@ class _GalleryScreenState extends State<GalleryScreen>
     ImageData(
       id: 6,
       name: 'Northern Lights',
-      description:
-          'Dancing aurora borealis painting the night sky in ethereal colors.',
+      description: 'Dancing aurora borealis painting the night sky in ethereal colors.',
       color: Colors.purple.shade600,
       emoji: '🌌',
       location: 'Iceland',
@@ -77,10 +72,7 @@ class _GalleryScreenState extends State<GalleryScreen>
   @override
   void initState() {
     super.initState();
-    _staggerController = AnimationController(
-      duration: Duration(milliseconds: 1200),
-      vsync: this,
-    )..forward();
+    _staggerController = AnimationController(duration: Duration(milliseconds: 1200), vsync: this)..forward();
   }
 
   @override
@@ -109,11 +101,7 @@ class _GalleryScreenState extends State<GalleryScreen>
                   color: Colors.transparent,
                   child: Text(
                     'Explore Nature',
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
+                    style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                 ),
               ),
@@ -132,13 +120,10 @@ class _GalleryScreenState extends State<GalleryScreen>
                 mainAxisSpacing: 16,
                 childAspectRatio: 0.8,
               ),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final image = images[index];
-                  return _buildAnimatedGridItem(image, index);
-                },
-                childCount: images.length,
-              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final image = images[index];
+                return _buildAnimatedGridItem(image, index);
+              }, childCount: images.length),
             ),
           ),
         ],
@@ -156,11 +141,7 @@ class _GalleryScreenState extends State<GalleryScreen>
         final animation = Tween<double>(begin: 0.0, end: 1.0).animate(
           CurvedAnimation(
             parent: _staggerController,
-            curve: Interval(
-              animationStart,
-              animationEnd,
-              curve: Curves.easeOutBack,
-            ),
+            curve: Interval(animationStart, animationEnd, curve: Curves.easeOutBack),
           ),
         );
 
@@ -172,23 +153,12 @@ class _GalleryScreenState extends State<GalleryScreen>
               opacity: animation.value.clamp(0.0, 1.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    PageTransitions.fadeTransition(
-                      GalleryDetailScreen(image: image),
-                    ),
-                  );
+                  Navigator.push(context, PageTransitions.fadeTransition(GalleryDetailScreen(image: image)));
                 },
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: image.color.withOpacity(0.3),
-                        blurRadius: 15,
-                        offset: Offset(0, 8),
-                      )
-                    ],
+                    boxShadow: [BoxShadow(color: image.color.withValues(alpha: 0.3), blurRadius: 15, offset: Offset(0, 8))],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,18 +180,10 @@ class _GalleryScreenState extends State<GalleryScreen>
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
-                                      colors: [
-                                        image.color,
-                                        image.color.withOpacity(0.8)
-                                      ],
+                                      colors: [image.color, image.color.withValues(alpha: 0.8)],
                                     ),
                                   ),
-                                  child: Center(
-                                    child: Text(
-                                      image.emoji,
-                                      style: TextStyle(fontSize: 60),
-                                    ),
-                                  ),
+                                  child: Center(child: Text(image.emoji, style: TextStyle(fontSize: 60))),
                                 ),
                               ),
                             ),
@@ -234,12 +196,9 @@ class _GalleryScreenState extends State<GalleryScreen>
                                   color: Colors.transparent,
                                   child: Container(
                                     constraints: BoxConstraints(maxWidth: 60),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 6,
-                                      vertical: 3,
-                                    ),
+                                    padding: EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                                     decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.9),
+                                      color: Colors.white.withValues(alpha: 0.9),
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     child: FittedBox(
@@ -247,19 +206,11 @@ class _GalleryScreenState extends State<GalleryScreen>
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Icon(
-                                            Icons.star,
-                                            color: Colors.amber,
-                                            size: 12,
-                                          ),
+                                          Icon(Icons.star, color: Colors.amber, size: 12),
                                           SizedBox(width: 2),
                                           Text(
                                             '${image.rating}',
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black87,
-                                            ),
+                                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.black87),
                                           ),
                                         ],
                                       ),
@@ -286,15 +237,11 @@ class _GalleryScreenState extends State<GalleryScreen>
                                 tag: 'title_${image.id}',
                                 child: Material(
                                   color: Colors.transparent,
-                                  child: Container(
+                                  child: SizedBox(
                                     width: double.infinity,
                                     child: Text(
                                       image.name,
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black87,
-                                      ),
+                                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black87),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -306,14 +253,11 @@ class _GalleryScreenState extends State<GalleryScreen>
                                 tag: 'location_${image.id}',
                                 child: Material(
                                   color: Colors.transparent,
-                                  child: Container(
+                                  child: SizedBox(
                                     width: double.infinity,
                                     child: Text(
                                       image.location ?? '',
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color: Colors.grey[600],
-                                      ),
+                                      style: TextStyle(fontSize: 10, color: Colors.grey[600]),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
